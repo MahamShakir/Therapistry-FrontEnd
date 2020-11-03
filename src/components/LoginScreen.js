@@ -1,41 +1,58 @@
-import axios from 'axios';
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { Text, View, StyleSheet , Image, TouchableOpacity } from 'react-native';
-import {Button, TextInput} from 'react-native-paper';
+import {Button, Paragraph, TextInput} from 'react-native-paper';
 
 import {useNavigation} from '@react-navigation/native';
 import { SCREENS } from '../utils/constants';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { loginUser } from '../sources/UserSources';
 
 
 const LoginScreen = (props) => {
-   // const dispatch = useDispatch();
     let [email, setEmail] = useState("");
     let [password, setPassword] = useState("");
+    let [error, setError] = useState("");
 
     const navigator = useNavigation();
+    const dispatch = useDispatch();
 
-    function onPress(){
-        axios.post('https://therapistry.herokuapp.com/login', {
-            email,
-            password
-        }).then(res => {
-            console.log(res.data['token'] + 'hi');
-            if(res.data['token']){
-                navigator.navigate(SCREENS.HOME_SCREEN);
-            }
+    const loginReducer = useSelector(state => state.userReducer.login);
 
-             })
+    function handleLoginFail(err) {
+        if(err.response.status == 401) setError("Invalid Credentials");
+        else {
+            setError("Some error occured");
+        }
     }
 
+    function onPress(){
+
+        if(!(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email))) {
+            setError("Email should be of the form a@b.com");
+        } else if(password.length <= 6) {
+            setError("Please enter a password with 6 or more characters");
+        } else {
+            dispatch(loginUser({email, password}, handleLoginFail));
+        }
+    }
+
+    useEffect(() => {
+        if(loginReducer.isSuccess == true) {
+            navigator.reset({
+                index: 0,
+                routes: [{
+                    name: SCREENS.HOME_SCREEN
+                }]
+            })
+        }
+    }, [loginReducer.isLoading])
 
     return(
-
         <View style={styles.container}>
 
             <Image source = {require('../images/logo.png')}
                     style = {styles.logo}
-              />
+            />
 
 
             <TextInput
@@ -52,13 +69,15 @@ const LoginScreen = (props) => {
                 secureTextEntry={true}
                 onChangeText = {(password) => setPassword(password)}
                 />
+            
+            <Paragraph style={{color: 'red'}}>{error}</Paragraph>
 
-            <Button theme={{ roundness: 8}} mode='contained' style={styles.button} onPress={onPress}>
-            Submit  
+            <Button mode='contained' style={styles.button} onPress={onPress}>
+            Log In  
             </Button>
             <View style={styles.signup}> 
                 <Text  style = {{color: '#FFFFFF'}}>Don't Have An Account Yet?</Text>
-                <TouchableOpacity onPress = {() => navigator.navigate(SCREENS.SIGNUP_SCREENs)}><Text style = {{color: '#FFFFFF' , fontWeight: 'bold', fontSize: 16}}>  Sign Up!</Text></TouchableOpacity>
+                <TouchableOpacity onPress = {() => navigator.navigate(SCREENS.SIGNUP_SCREEN)}><Text style = {{color: '#FFFFFF' , fontWeight: 'bold', fontSize: 16}}>  Sign Up!</Text></TouchableOpacity>
             </View>
         </View>
     );
@@ -78,6 +97,7 @@ const styles = StyleSheet.create({
         marginLeft: '25%',
         padding: 5,
         width:'50%',
+        borderRadius: 8
     },
     logo : {
         width: '50%',
