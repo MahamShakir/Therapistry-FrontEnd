@@ -1,0 +1,18 @@
+/*screens*/
+export const SCREENS = {
+    SPLASH_SCREEN: "SplashScreen",
+    LOGIN_SCREEN: "LoginScreen",
+    HOME_SCREEN: "HomeScreen"
+}
+
+
+/*actions*/
+//export const ADD_ARTICLE = "ADD_ARTICLE";
+
+export const CREATE_PATIENT_INIT = "CREATE_PATIENT_INIT";
+export const CREATE_PATIENT_SUCCESS = "CREATE_PATIENT_SUCCESS";
+export const CREATE_PATIENT_FAILURE = "CREATE_PATIENT_FAILURE";
+
+export const LOGIN_PATIENT_INIT = "LOGIN_PATIENT_INIT";
+export const LOGIN_PATIENT_SUCCESS = "LOGIN_PATIENT_SUCCESS";
+export const LOGIN_PATIENT_FAILURE = "LOGIN_PATIENT_FAILURE";
