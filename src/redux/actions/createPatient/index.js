@@ -9,6 +9,7 @@ export const createPatientInit = () => {
 export const createPatientSuccess = () => {
     return { 
         type : CREATE_PATIENT_SUCCESS
+        //payload
     }
 }
 

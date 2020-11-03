@@ -2,7 +2,8 @@
 export const SCREENS = {
     SPLASH_SCREEN: "SplashScreen",
     LOGIN_SCREEN: "LoginScreen",
-    HOME_SCREEN: "HomeScreen"
+    HOME_SCREEN: "HomeScreen",
+    SIGNUP_SCREEN: "SignupScreen"
 }
 
 

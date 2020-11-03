@@ -1,7 +1,11 @@
 import axios from 'axios';
 
-// export const loginUser = ({ email, password }, errorHandler = () => { }) => {
+// export const loginUser = ({ username, password }, errorHandler = () => { }) => {
 //     return (dispatch) => {
+            dispatch(loginUserInit());
+            axios.post('https://therapistry.herokuapp.com/login' , {
+                
+            })
 //     }
 // };
 

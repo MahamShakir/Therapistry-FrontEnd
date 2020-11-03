@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, {useState} from 'react'
-import { Text, View, StyleSheet , Image } from 'react-native';
+import { Text, View, StyleSheet , Image, TouchableOpacity } from 'react-native';
 import {Button, TextInput} from 'react-native-paper';
 
 import {useNavigation} from '@react-navigation/native';
@@ -21,7 +21,7 @@ const LoginScreen = (props) => {
             password
         }).then(res => {
             console.log(res.data['token'] + 'hi');
-            if(res.data['user_role'] === 'Patient'){
+            if(res.data['token']){
                 navigator.navigate(SCREENS.HOME_SCREEN);
             }
 
@@ -41,7 +41,7 @@ const LoginScreen = (props) => {
             <TextInput
                 label='Email'
                 mode='outlined'
-                placeholder='Enter Username'
+                placeholder='Enter Email'
                 onChangeText = {(email) => setEmail(email)}
                 />
    
@@ -58,7 +58,7 @@ const LoginScreen = (props) => {
             </Button>
             <View style={styles.signup}> 
                 <Text  style = {{color: '#FFFFFF'}}>Don't Have An Account Yet?</Text>
-                <Text style = {{color: '#FFFFFF' , fontWeight: 'bold', fontSize: 16}}>  Sign Up!</Text>
+                <TouchableOpacity onPress = {() => navigator.navigate(SCREENS.SIGNUP_SCREENs)}><Text style = {{color: '#FFFFFF' , fontWeight: 'bold', fontSize: 16}}>  Sign Up!</Text></TouchableOpacity>
             </View>
         </View>
     );
@@ -89,10 +89,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        marginVertical: '15%'
+
 
     }
 })
+
+
 
 
 export default LoginScreen;

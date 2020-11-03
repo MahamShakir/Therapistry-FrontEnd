@@ -1,1 +1,2 @@
-export * from './createPateint';
+export * from './createPatient';
+export * from './loginPatient';
