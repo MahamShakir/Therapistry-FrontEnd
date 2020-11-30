@@ -35,17 +35,15 @@ const LoginScreen = (props) => {
             dispatch(loginUser({email, password}, handleLoginFail));
         }
     }
-
-    useEffect(() => {
-        if(loginReducer.isSuccess == true) {
-            navigator.reset({
-                index: 0,
-                routes: [{
-                    name: SCREENS.HOME_SCREEN
-                }]
-            })
-        }
-    }, [loginReducer.isLoading])
+    
+    if(loginReducer.isSuccess == true) {
+        navigator.reset({
+            index: 0,
+            routes: [{
+                name: SCREENS.HOME_SCREEN
+            }]
+        })
+    }
 
     return(
         <View style={styles.container}>

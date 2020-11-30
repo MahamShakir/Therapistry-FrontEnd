@@ -8,12 +8,17 @@ export const SCREENS = {
 
 
 /*actions*/
-//export const ADD_ARTICLE = "ADD_ARTICLE";
-
-export const CREATE_PATIENT_INIT = "CREATE_PATIENT_INIT";
-export const CREATE_PATIENT_SUCCESS = "CREATE_PATIENT_SUCCESS";
-export const CREATE_PATIENT_FAILURE = "CREATE_PATIENT_FAILURE";
 
 export const LOGIN_USER_INIT = "LOGIN_USER_INIT";
 export const LOGIN_USER_SUCCESS = "LOGIN_USER_SUCCESS";
 export const LOGIN_USER_FAILURE = "LOGIN_USER_FAILURE";
+
+export const SIGNUP_USER_INIT = "SIGNUP_USER_INIT";
+export const SIGNUP_USER_SUCCESS = "SIGNUP_USER_SUCCESS"
+export const SIGNUP_USER_FAILURE = "SIGNUP_USER_FAILURE";
+
+/*APIS*/
+
+export const API_LOGIN = "https://therapistry.herokuapp.com/login";
+export const API_PATIENTS = "https://therapistry.herokuapp.com/patients";
+export const API_THERAPISTS = "https://therapistry.herokuapp.com/therapists";

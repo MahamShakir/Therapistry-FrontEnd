@@ -1,11 +1,13 @@
 import axios from 'axios';
-import { AsyncStorage } from '@react-native-community/async-storage';
+import { API_LOGIN, API_PATIENTS, API_THERAPISTS} from '../utils/constants'
 import { loginUserFailure, loginUserInit, loginUserSuccess } from '../redux/actions/login';
+import { signupUserInit, signupUserSuccess, signupUserFailure} from '../redux/actions/signup';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export const loginUser = ({ email, password }, errorHandler = (err) => { }) => {
     return (dispatch) => {
         dispatch(loginUserInit());
-        axios.post('https://therapistry.herokuapp.com/login' , {
+        axios.post(API_LOGIN , {
             email,
             password
         }).then(async res => {
@@ -14,6 +16,7 @@ export const loginUser = ({ email, password }, errorHandler = (err) => { }) => {
                 'token',
                 token
             );
+            await AsyncStorage.setItem(); //user: {user_id: bla, role....}
             dispatch(loginUserSuccess(res.data));
         })
         .catch(err => {
@@ -22,3 +25,30 @@ export const loginUser = ({ email, password }, errorHandler = (err) => { }) => {
         });
     }
 };
+
+export const signupUser = ({ fullName, email, password, checked}, errorHandler = (err) => { }) => {
+    return(dispatch) => {
+        dispatch(signupUserInit());
+        let url;
+        if(checked === 'patient'){
+            url = API_PATIENTS;
+        }
+        else if(checked === 'therapist'){
+            url = API_THERAPISTS;
+        }
+        
+        axios.post(url , {
+            fullName,
+            email,
+            password
+        }).then(res => {
+            dispatch(signupUserSuccess(res.data));
+        })
+        .catch(err => {
+            dispatch(signupUserFailure(err));
+            errorHandler(err);
+        });
+
+    }
+}
+

@@ -21,3 +21,13 @@ const HomeScreen = (props) => {
   
   
 export default HomeScreen;
+
+// user=await AsyncStorage.getItem('user)
+// role = user.role
+
+// if(role == therapist) shwo this;
+// if(role == patient) show this;
+
+// getItem('token')
+// if(token == null) go to login;
+// if(token found) go to home;

@@ -1,13 +1,13 @@
-import axios from 'axios';
-import React, {useState} from 'react';
+import React, { useState , useEffect} from 'react';
 import { Text, View, StyleSheet , Image } from 'react-native';
 import {Button, TextInput, RadioButton, IconButton, Paragraph} from 'react-native-paper';
 
 import {useNavigation} from '@react-navigation/native';
+import { useDispatch , useSelector } from 'react-redux';
 import { SCREENS } from '../utils/constants';
+import { signupUser } from '../sources/UserSources';
 
 const SignupScreen = (props) => {
-   // const dispatch = useDispatch();
     let [fullName, setFullName] = useState("");
     let [email, setEmail] = useState("");
     let [password, setPassword] = useState("");
@@ -15,6 +15,16 @@ const SignupScreen = (props) => {
     let [error, setError] = useState("");
     
     const navigator = useNavigation();
+    const dispatch = useDispatch();
+
+    const signupReducer = useSelector( state => state.userReducer.signup);
+
+    function handleSignupFail(err) {
+        if(err.response.status == 400) 
+            setError("User Exists");
+        else
+            setError("Some Error occured");
+    }
 
     function onPress(){
         if(!(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email))) {
@@ -27,40 +37,14 @@ const SignupScreen = (props) => {
             setError("Please enter your full name.");
             return;
         }
-        if(checked === 'patient'){
-            axios.post('https://therapistry.herokuapp.com/patients' , {
-                fullName,
-                email,
-                password
-            }).then(res => {
-                console.log(res.data['success']);
-                if(res.data['success'] === 'true'){
-                    setError("patient created successfully");
-                    navigator.navigate(SCREENS.LOGIN_SCREEN);
-                }
-                else{
-                    setError("Error creating patient, try again.");
-                }
-            })
-        }
-        else if(checked === 'therapist'){
-            axios.post('https://therapistry.herokuapp.com/therapists' , {
-                fullName,
-                email,
-                password
-            }).then(res => {
-                if(res.data['success'] === 'true'){
-                    setError("Therapist created successfully.");
-                    navigator.navigate(SCREENS.LOGIN_SCREEN);
-                }
-                else{
-                    setError("Error creating therapist, try again.");
-                }
-            })
 
+        else{
+            dispatch(signupUser({fullName, email, password, checked}, handleSignupFail));
         }
-        else 
-            setError('Please fill in all the fields.');
+    }
+
+    if(signupReducer.isSuccess == true) {
+        navigator.navigate(SCREENS.LOGIN_SCREEN);
     }
 
 
