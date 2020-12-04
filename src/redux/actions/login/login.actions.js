@@ -1,4 +1,4 @@
-import {LOGIN_USER_INIT , LOGIN_USER_SUCCESS , LOGIN_USER_FAILURE} from '../../../utils/constants';
+import {LOGIN_USER_INIT , LOGIN_USER_SUCCESS , LOGIN_USER_FAILURE, LOGIN_USER_CLEAR} from '../../../utils/constants';
 
 export const loginUserInit = () => {
     return{
@@ -16,6 +16,13 @@ export const loginUserSuccess = (payload) => {
 export const loginUserFailure = (payload) => {
     return {
         type : LOGIN_USER_FAILURE,
+        payload
+    }
+}
+
+export const loginUserClear = (payload) => {
+    return {
+        type : LOGIN_USER_CLEAR,
         payload
     }
 }

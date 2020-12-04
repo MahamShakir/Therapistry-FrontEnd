@@ -16,7 +16,6 @@ export const loginUser = ({ email, password }, errorHandler = (err) => { }) => {
                 'token',
                 token
             );
-            await AsyncStorage.setItem(); //user: {user_id: bla, role....}
             dispatch(loginUserSuccess(res.data));
         })
         .catch(err => {

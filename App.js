@@ -23,20 +23,21 @@ import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { RootNavigator } from './src/navigation/RootNavigator';
+
+
 const Stack = createStackNavigator();
 const store = createStore(rootReducer, {}, applyMiddleware(thunk, logger));
+
+const Drawer = createDrawerNavigator();
 
 const Main = () => {
   return (
     <Provider store={store}>
       <NavigationContainer>
         <PaperProvider>
-            <Stack.Navigator initialRouteName={SCREENS.SPLASH_SCREEN}>
-              <Stack.Screen name={SCREENS.SPLASH_SCREEN} component={SplashScreen} />
-              <Stack.Screen name={SCREENS.LOGIN_SCREEN} component={LoginScreen} />
-              <Stack.Screen name={SCREENS.HOME_SCREEN} component={HomeScreen} />
-              <Stack.Screen name={SCREENS.SIGNUP_SCREEN} component={SignupScreen} />
-            </Stack.Navigator>
+            <RootNavigator />
         </PaperProvider>
       </NavigationContainer>
     </Provider>

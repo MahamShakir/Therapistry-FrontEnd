@@ -43,9 +43,11 @@ const SignupScreen = (props) => {
         }
     }
 
-    if(signupReducer.isSuccess == true) {
-        navigator.navigate(SCREENS.LOGIN_SCREEN);
-    }
+    useEffect(() => {
+        if(signupReducer.isSuccess == true) {
+            navigator.navigate(SCREENS.LOGIN_SCREEN);
+        }
+    }, [signupReducer.isSuccess]);
 
 
     return(

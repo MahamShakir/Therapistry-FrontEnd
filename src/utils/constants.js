@@ -1,3 +1,9 @@
+/* navigators */
+export const NAVIGATORS = {
+    ROOT_NAVIGATOR: "RootNavigator",
+    HOME_NAVIGATOR: "HomeNavigator"
+}
+
 /*screens*/
 export const SCREENS = {
     SPLASH_SCREEN: "SplashScreen",
@@ -12,6 +18,7 @@ export const SCREENS = {
 export const LOGIN_USER_INIT = "LOGIN_USER_INIT";
 export const LOGIN_USER_SUCCESS = "LOGIN_USER_SUCCESS";
 export const LOGIN_USER_FAILURE = "LOGIN_USER_FAILURE";
+export const LOGIN_USER_CLEAR = "LOGIN_USER_CLEAR";
 
 export const SIGNUP_USER_INIT = "SIGNUP_USER_INIT";
 export const SIGNUP_USER_SUCCESS = "SIGNUP_USER_SUCCESS"

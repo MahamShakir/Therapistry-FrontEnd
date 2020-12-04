@@ -3,7 +3,7 @@ import { Text, View, StyleSheet , Image, TouchableOpacity } from 'react-native';
 import {Button, Paragraph, TextInput} from 'react-native-paper';
 
 import {useNavigation} from '@react-navigation/native';
-import { SCREENS } from '../utils/constants';
+import { NAVIGATORS, SCREENS } from '../utils/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../sources/UserSources';
 
@@ -14,8 +14,8 @@ const LoginScreen = (props) => {
     let [error, setError] = useState("");
 
     const navigator = useNavigation();
+    
     const dispatch = useDispatch();
-
     const loginReducer = useSelector(state => state.userReducer.login);
 
     function handleLoginFail(err) {
@@ -36,14 +36,18 @@ const LoginScreen = (props) => {
         }
     }
     
-    if(loginReducer.isSuccess == true) {
-        navigator.reset({
-            index: 0,
-            routes: [{
-                name: SCREENS.HOME_SCREEN
-            }]
-        })
-    }
+    console.log(loginReducer.isLoading);
+
+    useEffect(() => {
+        if(loginReducer.isSuccess == true) {
+            navigator.reset({
+                index: 0,
+                routes: [{
+                    name: NAVIGATORS.HOME_NAVIGATOR
+                }]
+            })
+        }
+    }, [loginReducer.isLoading]);
 
     return(
         <View style={styles.container}>

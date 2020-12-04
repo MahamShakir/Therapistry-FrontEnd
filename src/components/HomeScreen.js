@@ -1,20 +1,22 @@
-import React from 'react';
+import AsyncStorage from '@react-native-community/async-storage';
+import React, { useEffect, useState } from 'react';
 import {View} from 'react-native';
-import { Title } from 'react-native-paper';
+import { Title} from 'react-native-paper';
 
 
 
 const HomeScreen = (props) => {
-  
- 
+
+  let [myarr, setMyarr] = useState([1, 2, 3, 4]);
+
     return (
-      <View style = {{
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center"
-      }}>
-        <Title>Home Screen</Title>
-      </View>
+        <View style = {{
+          flex: 1,
+          alignItems: "center",
+          justifyContent: "center"
+        }}>
+          <Title>Home Screen</Title>
+        </View>
     )
   };
   
