@@ -15,7 +15,7 @@ export const RootNavigator = () => {
             <Stack.Screen name={SCREENS.SPLASH_SCREEN} component={SplashScreen} />
             <Stack.Screen name={SCREENS.LOGIN_SCREEN} component={LoginScreen} />
             <Stack.Screen name={SCREENS.SIGNUP_SCREEN} component={SignupScreen} />
-            <Stack.Screen name={NAVIGATORS.HOME_NAVIGATOR} component={HomeNavigator} />
+            <Stack.Screen options={{headerShown:false}} name={NAVIGATORS.HOME_NAVIGATOR} component={HomeNavigator} />
         </Stack.Navigator>
     )
 }

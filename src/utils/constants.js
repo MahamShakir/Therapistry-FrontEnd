@@ -1,3 +1,9 @@
+/* custom */
+export const ROLES = {
+    THERAPIST: "theropist",
+    PATIENT: "Patient"
+}
+
 /* navigators */
 export const NAVIGATORS = {
     ROOT_NAVIGATOR: "RootNavigator",
@@ -9,7 +15,8 @@ export const SCREENS = {
     SPLASH_SCREEN: "SplashScreen",
     LOGIN_SCREEN: "LoginScreen",
     HOME_SCREEN: "HomeScreen",
-    SIGNUP_SCREEN: "SignupScreen"
+    SIGNUP_SCREEN: "SignupScreen",
+    THERAPIST_HOME_SCREEN: "TherapistHomeScreen"
 }
 
 
@@ -23,6 +30,10 @@ export const LOGIN_USER_CLEAR = "LOGIN_USER_CLEAR";
 export const SIGNUP_USER_INIT = "SIGNUP_USER_INIT";
 export const SIGNUP_USER_SUCCESS = "SIGNUP_USER_SUCCESS"
 export const SIGNUP_USER_FAILURE = "SIGNUP_USER_FAILURE";
+
+export const GET_PATIENTS_INIT = "GET_PATIENTS_INIT";
+export const GET_PATIENTS_SUCCESS = "GET_PATIENTS_SUCCESS";
+export const GET_PATIENTS_FAILURE = "GET_PATIENTS_FAILURE";
 
 /*APIS*/
 

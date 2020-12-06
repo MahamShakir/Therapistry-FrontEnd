@@ -1,12 +1,14 @@
-import React, { useEffect } from  'react';
+import React, { useEffect, useState } from  'react';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 import { NAVIGATORS, SCREENS } from '../utils/constants';
-import HomeScreen from '../components/HomeScreen';
+import LoginScreen from '../components/LoginScreen';
+import TherapistHomeScreen from '../components/TherapistHomeScreen'
 import { Drawer } from 'react-native-paper';
 import AsyncStorage from '@react-native-community/async-storage';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUserClear } from '../redux/actions/login';
 import { useNavigation } from '@react-navigation/native';
+import {ROLES} from "../utils/constants"
 
 const NavigationDrawer = createDrawerNavigator();
 
@@ -49,9 +51,14 @@ export const DrawerScreens = (props) => {
 }
 
 export const HomeNavigator = () => {
+
+    let userReducer = useSelector(state => state.userReducer.login);
+    let role;
+    if(userReducer.isSuccess) role = userReducer.data.user_role;
+    
     return(
         <NavigationDrawer.Navigator initialRouteName={SCREENS.HOME_SCREEN} drawerContent={props => <DrawerScreens {...props} />}>
-            <NavigationDrawer.Screen name={SCREENS.HOME_SCREEN} component={HomeScreen} />
+            {role==ROLES.THERAPIST && <NavigationDrawer.Screen name={SCREENS.THERAPIST_HOME_SCREEN} component={TherapistHomeScreen}  />}
         </NavigationDrawer.Navigator>
     )
 }
