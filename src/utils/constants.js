@@ -1,7 +1,7 @@
 /* custom */
 export const ROLES = {
-    THERAPIST: "theropist",
-    PATIENT: "Patient"
+    THERAPIST: "therapist",
+    PATIENT: "patient"
 }
 
 /* navigators */
@@ -16,7 +16,8 @@ export const SCREENS = {
     LOGIN_SCREEN: "LoginScreen",
     HOME_SCREEN: "HomeScreen",
     SIGNUP_SCREEN: "SignupScreen",
-    THERAPIST_HOME_SCREEN: "TherapistHomeScreen"
+    THERAPIST_HOME_SCREEN: "TherapistHomeScreen",
+    CALENDAR_SCREEN: "CalendarScreen"
 }
 
 
