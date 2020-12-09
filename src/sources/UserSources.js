@@ -1,7 +1,16 @@
 import axios from 'axios';
 import { API_LOGIN, API_PATIENTS, API_THERAPISTS} from '../utils/constants'
-import { loginUserFailure, loginUserInit, loginUserSuccess } from '../redux/actions/login';
-import { signupUserInit, signupUserSuccess, signupUserFailure} from '../redux/actions/signup';
+import { 
+    loginUserFailure, 
+    loginUserInit, 
+    loginUserSuccess, 
+    signupUserInit, 
+    signupUserSuccess, 
+    signupUserFailure,
+    logoutUserInit,
+    logoutUserFailure,
+    loginUserClear} 
+from '../redux/actions';
 import AsyncStorage from '@react-native-community/async-storage';
 
 export const loginUser = ({ email, password }, errorHandler = (err) => { }) => {
@@ -51,3 +60,17 @@ export const signupUser = ({ fullName, email, password, checked}, errorHandler =
     }
 }
 
+export const logoutUser = (errorHandler = (err) => {}) => {
+    return (dispatch) => {
+        dispatch(logoutUserInit());
+        AsyncStorage.removeItem('token', (err) => {
+            if(err) {
+                dispatch(logoutUserFailure());
+                errorHandler(err);
+            }
+            else {
+                dispatch(loginUserClear());
+            }
+        })
+    }
+}

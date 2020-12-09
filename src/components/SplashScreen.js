@@ -11,25 +11,27 @@ const SplashScreen = (props) => {
     const navigator = useNavigation();
 
     useEffect(() => {
-      (async () => {
-        token = await AsyncStorage.getItem('token');
-        if(token){
-          navigator.reset({
-            index: 0,
-            routes: [{
-                name: NAVIGATORS.HOME_NAVIGATOR
-            }]
-          })
+      AsyncStorage.getItem('token', (err, token) => {
+        if(err) console.log("Login error: ", err);
+        else {
+          if(token){
+            navigator.reset({
+              index: 0,
+              routes: [{
+                  name: NAVIGATORS.HOME_NAVIGATOR,
+              }]
+            })
+          }
+          else{
+            navigator.reset({
+              index: 0,
+              routes: [{
+                  name: SCREENS.LOGIN_SCREEN
+              }]
+            })
+          }
         }
-        else{
-          navigator.reset({
-            index: 0,
-            routes: [{
-                name: SCREENS.LOGIN_SCREEN
-            }]
-          })
-        }
-      })();
+      });
     }, []);
 
     return (
