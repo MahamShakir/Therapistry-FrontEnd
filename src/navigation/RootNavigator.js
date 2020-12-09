@@ -6,6 +6,7 @@ import SplashScreen from '../components/SplashScreen';
 import SignupScreen from '../components/SignupScreen';
 import { SCREENS, NAVIGATORS } from '../utils/constants';
 import { HomeNavigator } from './HomeNavigator';
+import ConversationsScreen from '../components/ConversationsScreen';
 
 const Stack = createStackNavigator();
 
@@ -15,6 +16,7 @@ export const RootNavigator = () => {
             <Stack.Screen name={SCREENS.SPLASH_SCREEN} component={SplashScreen} />
             <Stack.Screen name={SCREENS.LOGIN_SCREEN} component={LoginScreen} />
             <Stack.Screen name={SCREENS.SIGNUP_SCREEN} component={SignupScreen} />
+            <Stack.Screen name={SCREENS.CONVERSATIONS_SCREEN} component={ConversationsScreen} />
             <Stack.Screen options={{headerShown:false}} name={NAVIGATORS.HOME_NAVIGATOR} component={HomeNavigator} />
         </Stack.Navigator>
     )

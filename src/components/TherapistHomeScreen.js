@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import {View} from 'react-native'
-import { Appbar, Avatar, List } from 'react-native-paper';
+import {TouchableOpacity, View} from 'react-native'
+import { Appbar, Avatar, List, Button } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { displayPatients } from '../sources/TherapistSources';
-import {useNavigation} from '@react-navigation/native';
+import {DrawerActions, useNavigation} from '@react-navigation/native';
 import { SCREENS } from '../utils/constants';
 
 
@@ -14,8 +14,7 @@ const TherapistHomeScreen = () => {
     const dispatch = useDispatch();
     const navigator = useNavigation();
     const displayReducer = useSelector(state => state.therapistReducer.displaypatients);
-    const navigator = useNavigation();
-
+    
     function handleDisplayFail(err) {
         if(err.response.status == 500) setError("Some Error Occured");
         else {
@@ -42,7 +41,7 @@ const TherapistHomeScreen = () => {
     return(
         <View>
             <Appbar.Header>
-                <Avatar.Icon size={40} icon='qqchat' />
+                <TouchableOpacity onPress={() => navigator.dispatch(DrawerActions.openDrawer())}><Avatar.Icon icon="menu" size={50} /></TouchableOpacity>
                 <Appbar.Content title="Welcome Therapist!" style={{marginLeft:0}} />
                 <Appbar.Action icon='calendar-month' onPress={() => { navigator.navigate(SCREENS.CALENDAR_SCREEN)}} />
             </Appbar.Header>
