@@ -6,6 +6,7 @@ import { Drawer } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import {ROLES} from "../utils/constants"
+import ConversationsScreen from '../components/ConversationsScreen';
 import { logoutUser } from '../sources/UserSources';
 
 const NavigationDrawer = createDrawerNavigator();
@@ -56,8 +57,9 @@ export const HomeNavigator = () => {
     if(userReducer.isSuccess) role = userReducer.data.user_role;
     
     return(
-        <NavigationDrawer.Navigator initialRouteName={SCREENS.THERAPIST_HOME_SCREEN} drawerContent={props => <DrawerScreens {...props} />}>
-            {role==ROLES.THERAPIST && <NavigationDrawer.Screen name={SCREENS.THERAPIST_HOME_SCREEN} component={TherapistHomeScreen}  />}
+        <NavigationDrawer.Navigator drawerContent={props => <DrawerScreens {...props} />} initialRouteName={SCREENS.THERAPIST_HOME_SCREEN}>
+            {role == ROLES.THERAPIST && <NavigationDrawer.Screen name={SCREENS.THERAPIST_HOME_SCREEN} component={TherapistHomeScreen}  />}
+            <NavigationDrawer.Screen name={SCREENS.CONVERSATIONS_SCREEN} component={ConversationsScreen} />
         </NavigationDrawer.Navigator>
     )
 }
