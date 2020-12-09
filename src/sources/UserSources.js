@@ -19,13 +19,22 @@ export const loginUser = ({ email, password }, errorHandler = (err) => { }) => {
         axios.post(API_LOGIN , {
             email,
             password
-        }).then(async res => {
+        }).then(res => {
             const token = res.data["token"];
-            await AsyncStorage.setItem(
+            AsyncStorage.setItem(
                 'token',
                 token
-            );
-            dispatch(loginUserSuccess(res.data));
+            ).then(_ => {
+                AsyncStorage.setItem('user', JSON.stringify(res.data)).then(_ => {
+                    dispatch(loginUserSuccess(res.data));
+                }).catch((err) => {
+                    dispatch(loginUserFailure(err));
+                    errorHandler(err);
+                });
+            }).catch((err) => {
+                dispatch(loginUserFailure(err));
+                errorHandler(err);
+            });
         })
         .catch(err => {
             dispatch(loginUserFailure(err));
