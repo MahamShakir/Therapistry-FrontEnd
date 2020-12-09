@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from  'react';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
-import { NAVIGATORS, SCREENS } from '../utils/constants';
-import LoginScreen from '../components/LoginScreen';
+import { NAVIGATORS, SCREENS, ROLES } from '../utils/constants';
+import CalendarScreen from '../components/CalenderScreen';
 import TherapistHomeScreen from '../components/TherapistHomeScreen'
 import { Drawer } from 'react-native-paper';
 import AsyncStorage from '@react-native-community/async-storage';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUserClear } from '../redux/actions/login';
 import { useNavigation } from '@react-navigation/native';
-import {ROLES} from "../utils/constants"
 
 const NavigationDrawer = createDrawerNavigator();
 
@@ -59,6 +58,7 @@ export const HomeNavigator = () => {
     return(
         <NavigationDrawer.Navigator initialRouteName={SCREENS.HOME_SCREEN} drawerContent={props => <DrawerScreens {...props} />}>
             {role==ROLES.THERAPIST && <NavigationDrawer.Screen name={SCREENS.THERAPIST_HOME_SCREEN} component={TherapistHomeScreen}  />}
+            <NavigationDrawer.Screen name={SCREENS.CALENDAR_SCREEN} component={CalendarScreen}  />
         </NavigationDrawer.Navigator>
     )
 }

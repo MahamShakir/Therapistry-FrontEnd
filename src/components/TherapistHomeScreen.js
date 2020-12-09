@@ -1,8 +1,10 @@
 import React, { useEffect, useReducer, useState } from 'react';
-import {View} from 'react-native'
+import {View} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { Appbar, Avatar, List } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { displayPatients } from '../sources/TherapistSources';
+import { SCREENS } from '../utils/constants';
 
 
 const TherapistHomeScreen = () => {
@@ -10,6 +12,7 @@ const TherapistHomeScreen = () => {
     let [error, setError] = useState("");
 
     const dispatch = useDispatch();
+    const navigator = useNavigation();
     const displayReducer = useSelector(state => state.therapistReducer.displaypatients);
 
     function handleDisplayFail(err) {
@@ -34,7 +37,7 @@ const TherapistHomeScreen = () => {
             <Appbar.Header>
                 <Avatar.Icon size={40} icon='qqchat' />
                 <Appbar.Content title="Welcome Therapist!" style={{marginLeft:0}} />
-                <Appbar.Action icon='calendar-month' onPress={() => {console.log('heyya')}} />
+                <Appbar.Action icon='calendar-month' onPress={() => { navigator.navigate(SCREENS.CALENDAR_SCREEN)}} />
             </Appbar.Header>
 
 
@@ -44,7 +47,7 @@ const TherapistHomeScreen = () => {
                         return(
                             <List.Item 
                             title={patient.fullName}
-                            description = 'patient'
+                            description = 'Patient'
                             left={props => <List.Icon {...props} icon="account-heart"/>}
                         />)
                     })}
