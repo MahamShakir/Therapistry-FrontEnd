@@ -12,6 +12,7 @@ const TherapistHomeScreen = () => {
     let [error, setError] = useState("");
 
     const dispatch = useDispatch();
+    const navigator = useNavigation();
     const displayReducer = useSelector(state => state.therapistReducer.displaypatients);
     const navigator = useNavigation();
 
@@ -43,7 +44,7 @@ const TherapistHomeScreen = () => {
             <Appbar.Header>
                 <Avatar.Icon size={40} icon='qqchat' />
                 <Appbar.Content title="Welcome Therapist!" style={{marginLeft:0}} />
-                <Appbar.Action icon='calendar-month' onPress={() => {console.log('heyya')}} />
+                <Appbar.Action icon='calendar-month' onPress={() => { navigator.navigate(SCREENS.CALENDAR_SCREEN)}} />
             </Appbar.Header>
 
 
@@ -54,8 +55,8 @@ const TherapistHomeScreen = () => {
                             <List.Item 
                             key={i}
                             title={patient.fullName}
-                            description = 'patient'
                             onPress={() => handleOnPatientPress(i)}
+                            description = 'Patient'
                             left={props => <List.Icon {...props} icon="account-heart"/>}
                         />)
                     })}

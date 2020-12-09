@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from  'react';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
-import { SCREENS } from '../utils/constants';
+import { NAVIGATORS, SCREENS, ROLES } from '../utils/constants';
+import CalendarScreen from '../components/CalenderScreen';
 import TherapistHomeScreen from '../components/TherapistHomeScreen'
 import { Drawer } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
@@ -60,6 +61,7 @@ export const HomeNavigator = () => {
         <NavigationDrawer.Navigator drawerContent={props => <DrawerScreens {...props} />} initialRouteName={SCREENS.THERAPIST_HOME_SCREEN}>
             {role == ROLES.THERAPIST && <NavigationDrawer.Screen name={SCREENS.THERAPIST_HOME_SCREEN} component={TherapistHomeScreen}  />}
             <NavigationDrawer.Screen name={SCREENS.CONVERSATIONS_SCREEN} component={ConversationsScreen} />
+            <NavigationDrawer.Screen name={SCREENS.CALENDAR_SCREEN} component={CalendarScreen}  />
         </NavigationDrawer.Navigator>
     )
 }
