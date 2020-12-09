@@ -105,7 +105,7 @@ const SignupScreen = (props) => {
 
             <Paragraph style={{color: 'red'}}>{error}</Paragraph>
 
-            <Button mode='contained' style={styles.button} onPress={onPress}>
+            <Button mode='contained' style={styles.button} onPress={onPress} loading={signupReducer.isLoading} disabled={signupReducer.isLoading}>
             Sign Up  
             </Button>
     
