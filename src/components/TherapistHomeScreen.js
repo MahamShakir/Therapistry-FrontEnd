@@ -1,9 +1,9 @@
-import React, { useEffect, useReducer, useState } from 'react';
-import {View} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import React, { useEffect, useState } from 'react';
+import {View} from 'react-native'
 import { Appbar, Avatar, List } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { displayPatients } from '../sources/TherapistSources';
+import {useNavigation} from '@react-navigation/native';
 import { SCREENS } from '../utils/constants';
 
 
@@ -14,6 +14,7 @@ const TherapistHomeScreen = () => {
     const dispatch = useDispatch();
     const navigator = useNavigation();
     const displayReducer = useSelector(state => state.therapistReducer.displaypatients);
+    const navigator = useNavigation();
 
     function handleDisplayFail(err) {
         if(err.response.status == 500) setError("Some Error Occured");
@@ -32,6 +33,12 @@ const TherapistHomeScreen = () => {
         }
     }, [displayReducer.isSuccess]);
 
+    function handleOnPatientPress(i) {
+        navigator.navigate(SCREENS.CONVERSATIONS_SCREEN, {
+            conversation_with: patients[i]._id
+        })
+    }
+
     return(
         <View>
             <Appbar.Header>
@@ -43,10 +50,12 @@ const TherapistHomeScreen = () => {
 
             <List.Section>
                 <List.Subheader>Your Patients</List.Subheader>
-                    {displayReducer.isSuccess && patients.map((patient) => {
+                    {displayReducer.isSuccess && patients.map((patient, i) => {
                         return(
                             <List.Item 
+                            key={i}
                             title={patient.fullName}
+                            onPress={() => handleOnPatientPress(i)}
                             description = 'Patient'
                             left={props => <List.Icon {...props} icon="account-heart"/>}
                         />)

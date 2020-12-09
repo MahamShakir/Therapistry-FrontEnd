@@ -1,7 +1,16 @@
 import axios from 'axios';
 import { API_LOGIN, API_PATIENTS, API_THERAPISTS} from '../utils/constants'
-import { loginUserFailure, loginUserInit, loginUserSuccess } from '../redux/actions/login';
-import { signupUserInit, signupUserSuccess, signupUserFailure} from '../redux/actions/signup';
+import { 
+    loginUserFailure, 
+    loginUserInit, 
+    loginUserSuccess, 
+    signupUserInit, 
+    signupUserSuccess, 
+    signupUserFailure,
+    logoutUserInit,
+    logoutUserFailure,
+    loginUserClear} 
+from '../redux/actions';
 import AsyncStorage from '@react-native-community/async-storage';
 
 export const loginUser = ({ email, password }, errorHandler = (err) => { }) => {
@@ -10,13 +19,22 @@ export const loginUser = ({ email, password }, errorHandler = (err) => { }) => {
         axios.post(API_LOGIN , {
             email,
             password
-        }).then(async res => {
+        }).then(res => {
             const token = res.data["token"];
-            await AsyncStorage.setItem(
+            AsyncStorage.setItem(
                 'token',
                 token
-            );
-            dispatch(loginUserSuccess(res.data));
+            ).then(_ => {
+                AsyncStorage.setItem('user', JSON.stringify(res.data)).then(_ => {
+                    dispatch(loginUserSuccess(res.data));
+                }).catch((err) => {
+                    dispatch(loginUserFailure(err));
+                    errorHandler(err);
+                });
+            }).catch((err) => {
+                dispatch(loginUserFailure(err));
+                errorHandler(err);
+            });
         })
         .catch(err => {
             dispatch(loginUserFailure(err));
@@ -51,3 +69,17 @@ export const signupUser = ({ fullName, email, password, checked}, errorHandler =
     }
 }
 
+export const logoutUser = (errorHandler = (err) => {}) => {
+    return (dispatch) => {
+        dispatch(logoutUserInit());
+        AsyncStorage.removeItem('token', (err) => {
+            if(err) {
+                dispatch(logoutUserFailure());
+                errorHandler(err);
+            }
+            else {
+                dispatch(loginUserClear());
+            }
+        })
+    }
+}

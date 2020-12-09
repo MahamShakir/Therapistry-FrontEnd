@@ -4,10 +4,11 @@ import { NAVIGATORS, SCREENS, ROLES } from '../utils/constants';
 import CalendarScreen from '../components/CalenderScreen';
 import TherapistHomeScreen from '../components/TherapistHomeScreen'
 import { Drawer } from 'react-native-paper';
-import AsyncStorage from '@react-native-community/async-storage';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUserClear } from '../redux/actions/login';
 import { useNavigation } from '@react-navigation/native';
+import {ROLES} from "../utils/constants"
+import ConversationsScreen from '../components/ConversationsScreen';
+import { logoutUser } from '../sources/UserSources';
 
 const NavigationDrawer = createDrawerNavigator();
 
@@ -16,17 +17,18 @@ export const DrawerScreens = (props) => {
     const dispatch = useDispatch();
     const navigator = useNavigation();
 
-    let userReducer = useSelector(state => state.userReducer.login);
+    let loginReducer = useSelector(state => state.userReducer.login);
 
     function logout() {
-        (async () => {
-            await AsyncStorage.removeItem('token');
-            dispatch(loginUserClear());
-        })();
+        dispatch(logoutUser(handleLogoutError));
+    }
+
+    function handleLogoutError(err) {
+        console.error("Logout error: ", err);
     }
 
     useEffect(() => {
-        if(!userReducer.isLoggedIn) {
+        if(!loginReducer.data) {
             navigator.reset({
                 index: 0,
                 routes: [{
@@ -34,7 +36,7 @@ export const DrawerScreens = (props) => {
                 }]
             });
         }
-    }, [userReducer.isLoggedIn]);
+    }, [loginReducer.data]);
     
 
     return (
@@ -56,8 +58,9 @@ export const HomeNavigator = () => {
     if(userReducer.isSuccess) role = userReducer.data.user_role;
     
     return(
-        <NavigationDrawer.Navigator initialRouteName={SCREENS.HOME_SCREEN} drawerContent={props => <DrawerScreens {...props} />}>
-            {role==ROLES.THERAPIST && <NavigationDrawer.Screen name={SCREENS.THERAPIST_HOME_SCREEN} component={TherapistHomeScreen}  />}
+        <NavigationDrawer.Navigator drawerContent={props => <DrawerScreens {...props} />} initialRouteName={SCREENS.THERAPIST_HOME_SCREEN}>
+            {role == ROLES.THERAPIST && <NavigationDrawer.Screen name={SCREENS.THERAPIST_HOME_SCREEN} component={TherapistHomeScreen}  />}
+            <NavigationDrawer.Screen name={SCREENS.CONVERSATIONS_SCREEN} component={ConversationsScreen} />
             <NavigationDrawer.Screen name={SCREENS.CALENDAR_SCREEN} component={CalendarScreen}  />
         </NavigationDrawer.Navigator>
     )

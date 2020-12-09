@@ -9,8 +9,8 @@ import { loginUser } from '../sources/UserSources';
 
 
 const LoginScreen = (props) => {
-    let [email, setEmail] = useState("");
-    let [password, setPassword] = useState("");
+    let [email, setEmail] = useState("t1@t1.com");
+    let [password, setPassword] = useState("t1abcde");
     let [error, setError] = useState("");
 
     const navigator = useNavigation();
@@ -35,8 +35,6 @@ const LoginScreen = (props) => {
             dispatch(loginUser({email, password}, handleLoginFail));
         }
     }
-    
-    console.log(loginReducer.isLoading);
 
     useEffect(() => {
         if(loginReducer.isSuccess == true) {
@@ -61,6 +59,7 @@ const LoginScreen = (props) => {
                 label='Email'
                 mode='outlined'
                 placeholder='Enter Email'
+                defaultValue={email}
                 onChangeText = {(email) => setEmail(email)}
                 />
    
@@ -68,13 +67,14 @@ const LoginScreen = (props) => {
                 label='Password'
                 placeholder='Enter Password'
                 mode = 'outlined'
+                defaultValue={password}
                 secureTextEntry={true}
                 onChangeText = {(password) => setPassword(password)}
                 />
             
             <Paragraph style={{color: 'red'}}>{error}</Paragraph>
 
-            <Button mode='contained' style={styles.button} onPress={onPress}>
+            <Button mode='contained' style={styles.button} onPress={onPress} loading={loginReducer.isLoading} disabled={loginReducer.isLoading}>
             Log In  
             </Button>
             <View style={styles.signup}> 

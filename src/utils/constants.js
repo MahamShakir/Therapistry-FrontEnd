@@ -17,7 +17,8 @@ export const SCREENS = {
     HOME_SCREEN: "HomeScreen",
     SIGNUP_SCREEN: "SignupScreen",
     THERAPIST_HOME_SCREEN: "TherapistHomeScreen",
-    CALENDAR_SCREEN: "CalendarScreen"
+    CALENDAR_SCREEN: "CalendarScreen",
+    CONVERSATIONS_SCREEN: "ConversationsScreen"
 }
 
 
@@ -27,6 +28,11 @@ export const LOGIN_USER_INIT = "LOGIN_USER_INIT";
 export const LOGIN_USER_SUCCESS = "LOGIN_USER_SUCCESS";
 export const LOGIN_USER_FAILURE = "LOGIN_USER_FAILURE";
 export const LOGIN_USER_CLEAR = "LOGIN_USER_CLEAR";
+
+export const LOGOUT_USER_INIT = "LOGOUT_USER_INIT";
+export const LOGOUT_USER_SUCCESS = "LOGOUT_USER_SUCCESS";
+export const LOGOUT_USER_FAILURE = "LOGOUT_USER_FAILURE";
+export const LOGOUT_USER_CLEAR = "LOGOUT_USER_CLEAR";
 
 export const SIGNUP_USER_INIT = "SIGNUP_USER_INIT";
 export const SIGNUP_USER_SUCCESS = "SIGNUP_USER_SUCCESS"

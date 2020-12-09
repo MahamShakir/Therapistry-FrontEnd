@@ -9,7 +9,6 @@
 import React  from 'react';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 
 import rootReducer from './src/redux/reducers';
 
@@ -18,14 +17,9 @@ import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 
-import { createDrawerNavigator } from '@react-navigation/drawer';
 import { RootNavigator } from './src/navigation/RootNavigator';
 
-
-const Stack = createStackNavigator();
 const store = createStore(rootReducer, {}, applyMiddleware(thunk, logger));
-
-const Drawer = createDrawerNavigator();
 
 const Main = () => {
   return (
