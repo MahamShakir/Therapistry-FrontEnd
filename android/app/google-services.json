@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1087145474885",
+    "firebase_url": "https://therapistry-default-rtdb.firebaseio.com",
+    "project_id": "therapistry",
+    "storage_bucket": "therapistry.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1087145474885:android:d869e7b87124cd152f5c2c",
+        "android_client_info": {
+          "package_name": "com.therapistry"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1087145474885-tp460qov187usjlb85pma2e8suaqisvu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.therapistry",
+            "certificate_hash": "fc281da3e86687f8b4a9d6b28281705116aa00c3"
+          }
+        },
+        {
+          "client_id": "1087145474885-3nun3qgg63nkt5j8ss80t5v542jjqsg8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAB1lJ0zxZE-ia2b9PYdX1r-PLZJvcnnn8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1087145474885-3nun3qgg63nkt5j8ss80t5v542jjqsg8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
