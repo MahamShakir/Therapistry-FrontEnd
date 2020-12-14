@@ -6,8 +6,8 @@ import { SCREENS } from '../utils/constants';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
-import { createSlots } from '../sources/SlotsSource';
-import { displayAppointments } from '../sources/AppointmentSources';
+import { putSlots } from '../sources/SlotsSource';
+import { getAppointments } from '../sources/AppointmentSources';
 
 
 const CalendarScreen = () => {
@@ -21,7 +21,7 @@ const CalendarScreen = () => {
 
     const navigator = useNavigation();
     const dispatch = useDispatch();
-    const displayAppReducer = useSelector(state => state.appointmentsReducer.displayappointments);
+    const displayAppReducer = useSelector(state => state.appointmentsReducer.getappointments);
 
     function toggleDatePickerView ()  {
         setDatePickerVisible(!isDatePickerVisible);
@@ -65,12 +65,12 @@ const CalendarScreen = () => {
     }
 
     function handleScheduleUpdate() {
-        dispatch(createSlots({slots}, handleDisplayFail));
+        dispatch(putSlots({slots}, handleDisplayFail));
     }
 
     useEffect(() => {
         setSlots([]);
-        dispatch(displayAppointments(handleDisplayFail));
+        dispatch(getAppointments(handleDisplayFail));
     }, []);
 
     useEffect(() => {

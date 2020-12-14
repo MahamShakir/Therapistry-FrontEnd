@@ -1,6 +1,6 @@
-import displayappointments from './get-appointments.reducer';
+import getappointments from './get-appointments.reducer';
 import {combineReducers} from 'redux';
 
 export default combineReducers({
-    displayappointments
+    getappointments
 });

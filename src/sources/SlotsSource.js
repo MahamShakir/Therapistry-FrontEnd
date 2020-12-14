@@ -3,7 +3,7 @@ import { API_SLOTS, CREATE_SLOTS } from '../utils/constants'
 import { putSlotsFaiure, putSlotsInit, putSlotsSuccess } from '../redux/actions/slotsActions';
 import AsyncStorage from '@react-native-community/async-storage';
 
-export const createSlots = ({slots} , errorHandler = (err) => { }) => {
+export const putSlots = ({slots} , errorHandler = (err) => { }) => {
     return (dispatch, getState) => {
         dispatch(putSlotsInit);
         console.log(slots);

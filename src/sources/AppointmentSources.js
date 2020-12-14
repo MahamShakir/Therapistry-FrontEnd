@@ -2,7 +2,7 @@ import axios from 'axios';
 import {API_THERAPISTS } from '../utils/constants';
 import { getAppointmentsFailure, getAppointmentsInit, getAppointmentsSuccess } from '../redux/actions/appointmentsActions';
 
-export const displayAppointments = (errorHandler = (err) => { }) => {
+export const getAppointments = (errorHandler = (err) => { }) => {
     return(dispatch, getState) => {
         dispatch(getAppointmentsInit());
         let user = getState().userReducer.login.data;

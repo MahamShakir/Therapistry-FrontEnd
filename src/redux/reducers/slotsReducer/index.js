@@ -1,6 +1,6 @@
-import createslots from './put-slots.reducer';
+import putslots from './put-slots.reducer';
 import {combineReducers} from 'redux';
 
 export default combineReducers({
-    createslots
+    putslots
 });
