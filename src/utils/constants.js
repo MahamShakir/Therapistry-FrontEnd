@@ -19,7 +19,8 @@ export const SCREENS = {
     THERAPIST_HOME_SCREEN: "TherapistHomeScreen",
     CALENDAR_SCREEN: "CalendarScreen",
     CONVERSATIONS_SCREEN: "ConversationsScreen",
-    MOOD_SCREEN: "MoodScreen"
+    MOOD_SCREEN: "MoodScreen",
+    PATIENT_HOME_SCREEN: "PatientHomeScreen"
 }
 
 
