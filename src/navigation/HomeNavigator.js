@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from  'react';
 import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
 import { NAVIGATORS, SCREENS, ROLES } from '../utils/constants';
-import CalendarScreen from '../components/CalenderScreen';
-import TherapistHomeScreen from '../components/TherapistHomeScreen'
+import CalendarScreen from '../components/CalendarScreen';
+import TherapistHomeScreen from '../components/TherapistHomeScreen';
+import PatientHomeScreen from '../components/PatientHomeScreen';
 import { Drawer } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
@@ -58,7 +59,8 @@ export const HomeNavigator = () => {
     return(
         <NavigationDrawer.Navigator drawerContent={props => <DrawerScreens {...props} />} initialRouteName={SCREENS.THERAPIST_HOME_SCREEN}>
             {role == ROLES.THERAPIST && <NavigationDrawer.Screen name={SCREENS.THERAPIST_HOME_SCREEN} component={TherapistHomeScreen}  />}
-            <NavigationDrawer.Screen name={SCREENS.CALENDAR_SCREEN} component={CalendarScreen}  />
+            {role == ROLES.THERAPIST && <NavigationDrawer.Screen name={SCREENS.CALENDAR_SCREEN} component={CalendarScreen}  />}
+            {role == ROLES.PATIENT && <NavigationDrawer.Screen name={SCREENS.PATIENT_HOME_SCREEN} component={PatientHomeScreen} />}
         </NavigationDrawer.Navigator>
     )
 }

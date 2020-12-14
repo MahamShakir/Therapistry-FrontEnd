@@ -1,6 +1,6 @@
-import displaypatients from './get-patients.reducer';
+import createslots from './put-slots.reducer';
 import {combineReducers} from 'redux';
 
 export default combineReducers({
-    displaypatients
+    createslots
 });

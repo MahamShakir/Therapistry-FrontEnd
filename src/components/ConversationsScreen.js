@@ -27,8 +27,8 @@ export default function ConversationsScreen({route}) {
       ChatService.get_chat(currentUserId, otherUser, handleOnReceiveMessages).then(({chat, chat_ref}) => {
         setMessages(chat);
         setChatRef(chat_ref);
-      }, rej => {
-        console.error(rej);
+      }).catch(err => {
+        console.error(err);
       });
     } catch(err) {
       console.error(err);

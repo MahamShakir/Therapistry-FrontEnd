@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import {TouchableOpacity, View} from 'react-native'
-import { Appbar, Avatar, List, Button } from 'react-native-paper';
+import {TouchableOpacity, View, StyleSheet} from 'react-native'
+import { Appbar, Avatar, List, Button, IconButton } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { displayPatients } from '../sources/TherapistSources';
 import {DrawerActions, useNavigation} from '@react-navigation/native';
@@ -32,7 +32,7 @@ const TherapistHomeScreen = () => {
         }
     }, [displayReducer.isSuccess]);
 
-    function handleOnPatientPress(i) {
+    function handleOnChatPress(i) {
         navigator.navigate(SCREENS.CONVERSATIONS_SCREEN, {
             conversation_with: patients[i]._id
         })
@@ -51,17 +51,38 @@ const TherapistHomeScreen = () => {
                 <List.Subheader>Your Patients</List.Subheader>
                     {displayReducer.isSuccess && patients.map((patient, i) => {
                         return(
-                            <List.Item 
-                            key={i}
-                            title={patient.fullName}
-                            onPress={() => handleOnPatientPress(i)}
-                            description = 'Patient'
-                            left={props => <List.Icon {...props} icon="account-heart"/>}
-                        />)
+                                <List.Item 
+                                key={i}
+                                title={patient.fullName}
+                                description = 'Patient'
+                                left={props => <List.Icon {...props} icon="account-heart"/>}
+                                right={props => <View style={styles.list_item}>
+                                                    <IconButton 
+                                                        {...props} icon="chat" 
+                                                        onPress={() => handleOnChatPress(i)}
+                                                    />
+                                                    <IconButton 
+                                                        {...props} icon="format-list-bulleted" 
+                                                        onPress={() => navigator.navigate(SCREENS.MOOD_SCREEN)}
+                                                    />
+                                                </View>}
+                                />
+                                
+                                
+                        )
                     })}
             </List.Section>
        </View>
 
     )
 }
+
+const styles = StyleSheet.create({
+    list_item: {
+        flex: 1,
+        flexDirection : "row",
+        justifyContent: "flex-end"
+    }
+})
+
 export default TherapistHomeScreen;
