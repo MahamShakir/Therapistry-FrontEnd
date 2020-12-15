@@ -7,7 +7,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import { putSlots } from '../sources/TherapistSources';
-import { getAppointments } from '../sources/AppointmentSources';
+import { getTherapist } from '../sources/TherapistSources';
 
 
 const CalendarScreen = () => {
@@ -21,7 +21,7 @@ const CalendarScreen = () => {
 
     const navigator = useNavigation();
     const dispatch = useDispatch();
-    const displayAppReducer = useSelector(state => state.appointmentsReducer.getappointments);
+    const displayAppReducer = useSelector(state => state.therapistReducer.gettherapist);
 
     function toggleDatePickerView ()  {
         setDatePickerVisible(!isDatePickerVisible);
@@ -70,7 +70,7 @@ const CalendarScreen = () => {
 
     useEffect(() => {
         setSlots([]);
-        dispatch(getAppointments(handleDisplayFail));
+        dispatch(getTherapist(handleDisplayFail));
     }, []);
 
     useEffect(() => {

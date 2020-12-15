@@ -4,6 +4,9 @@ import {
     getTherapistsFailure, 
     getTherapistsInit, 
     getTherapistsSuccess,
+    getTherapistFailure, 
+    getTherapistInit, 
+    getTherapistSuccess,
     putSlotsFaiure, 
     putSlotsInit, 
     putSlotsSuccess } from '../redux/actions';
@@ -22,6 +25,24 @@ export const getTherapists = (errorHandler = (err) => { }) => {
         });
     }
 };
+
+
+export const getTherapist = (errorHandler = (err) => { }) => {
+    return(dispatch, getState) => {
+        dispatch(getTherapistInit());
+        let user = getState().userReducer.login.data;
+
+        axios.get( API_THERAPISTS + user.role_id
+        ).then(res => {
+            dispatch(getTherapistSuccess(res.data));
+        })
+        .catch(err => {
+            dispatch(getTherapistFailure(err));
+            errorHandler(err);
+        })
+    }
+}
+
 
 export const putSlots = ({slots} , errorHandler = (err) => { }) => {
     return (dispatch, getState) => {

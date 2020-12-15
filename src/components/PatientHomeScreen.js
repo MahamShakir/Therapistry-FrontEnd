@@ -13,6 +13,7 @@ const PatientHomeScreen = () => {
     let [therapists, setTherapists] = useState([]);
     let [slots, setSlots] = useState([]);
     let [therapists_id, setTherapistsID] = useState("");
+    let [name, setName] = useState("");
     let [error, setError] = useState("");
     let [isSnackVisible, setSnackVisible] = useState(false);
     let [isVisible, setVisible] = useState(false);
@@ -39,6 +40,7 @@ const PatientHomeScreen = () => {
     }
 
     function handleTherapistPress(i) {
+        setName(therapists[i].fullName);
         setTherapistsID(therapists[i]._id);
         setSlots(therapists[i].slots);
         toggleModal();
@@ -92,7 +94,7 @@ const PatientHomeScreen = () => {
             <Portal>
                 <Modal visible={isVisible} onDismiss={toggleModal} contentContainerStyle={styles.modalStyle}>
                     <List.Section>
-                        <List.Subheader>Available Slots</List.Subheader>
+                        <List.Subheader> {name}'s Available Slots</List.Subheader>
                         <Divider style={{height: 3}} />
                         {slots.map((slot, j) => {
                             return(

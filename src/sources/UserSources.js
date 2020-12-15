@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_LOGIN, API_PATIENTS, API_THERAPISTS} from '../utils/constants'
+import { API_LOGIN, API_PATIENTS, API_THERAPISTS, ROLES} from '../utils/constants'
 import { 
     loginUserFailure, 
     loginUserInit, 
@@ -47,10 +47,10 @@ export const signupUser = ({ fullName, email, password, checked}, errorHandler =
     return(dispatch) => {
         dispatch(signupUserInit());
         let url;
-        if(checked === 'patient'){
+        if(checked === ROLES.PATIENT){
             url = API_PATIENTS;
         }
-        else if(checked === 'therapist'){
+        else if(checked === ROLES.THERAPIST){
             url = API_THERAPISTS;
         }
         
