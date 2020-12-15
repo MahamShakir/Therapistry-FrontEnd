@@ -55,9 +55,15 @@ export const GET_APPOINTMENTS_INIT = "GET_APPOINTMENTS_INIT";
 export const GET_APPOINTMENTS_SUCCESS = "GET_APPOINTMENTS_SUCCESS";
 export const GET_APPOINTMENTS_FAILURE = "GET_APPOINTMENTS_FAILURE";
 
+export const BOOK_APPOINTMENT_INIT = "BOOK_APPOINTMENT_INIT";
+export const BOOK_APPOINTMENT_SUCCESS = "BOOK_APPOINTMENT_SUCCESS";
+export const BOOK_APPOINTMENT_FAILURE = "BOOK_APPOINTMENT_FAILURE";
+
 /*APIS*/
 export const API_LOGIN = "https://therapistry.herokuapp.com/login";
 export const API_PATIENTS = "https://therapistry.herokuapp.com/patients/";
 export const API_THERAPISTS = "https://therapistry.herokuapp.com/therapists/";
+export const API_APPOINTMENTS = "https://therapistry.herokuapp.com/appointments/";
 export const API_SLOTS = "https://therapistry.herokuapp.com/slots/therapists/";
 export const CREATE_SLOTS = "/create-slots";
+export const CONFIRM_SLOT = "/confirm-slot";

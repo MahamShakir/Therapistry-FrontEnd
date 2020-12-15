@@ -1,1 +1,1 @@
-export * from './get-therapists.actions';
+export * from './get-patients.actions';

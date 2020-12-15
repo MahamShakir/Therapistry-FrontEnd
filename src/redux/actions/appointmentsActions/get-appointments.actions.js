@@ -1,4 +1,4 @@
-import { GET_APPOINTMENTS_FAILURE, GET_APPOINTMENTS_INIT, GET_APPOINTMENTS_SUCCESS, GET_APPOINTMENTS_CLEAR} from '../../../utils/constants';
+import { GET_APPOINTMENTS_FAILURE, GET_APPOINTMENTS_INIT, GET_APPOINTMENTS_SUCCESS } from '../../../utils/constants';
 
 export const getAppointmentsInit = () => {
     return {

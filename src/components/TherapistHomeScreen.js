@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {TouchableOpacity, View, StyleSheet} from 'react-native'
 import { Appbar, Avatar, List, Button, IconButton } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPatients } from '../sources/TherapistSources';
+import { getPatients } from '../sources/PatientSources';
 import {DrawerActions, useNavigation} from '@react-navigation/native';
 import { SCREENS } from '../utils/constants';
 
@@ -13,7 +13,7 @@ const TherapistHomeScreen = () => {
 
     const dispatch = useDispatch();
     const navigator = useNavigation();
-    const displayReducer = useSelector(state => state.therapistReducer.getpatients);
+    const displayReducer = useSelector(state => state.patientReducer.getpatients);
     
     function handleDisplayFail(err) {
         if(err.response.status == 500) setError("Some Error Occured");

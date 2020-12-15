@@ -6,7 +6,7 @@ import { SCREENS } from '../utils/constants';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
-import { putSlots } from '../sources/SlotsSource';
+import { putSlots } from '../sources/TherapistSources';
 import { getAppointments } from '../sources/AppointmentSources';
 
 
@@ -112,7 +112,7 @@ const CalendarScreen = () => {
                             slot.status == "free" &&
                             <List.Item 
                                 key={i}
-                                title={moment(slot.date).format("Do MMMM, YYYY")}
+                                title={moment(slot.date).format("ddd Do MMM, 'YY")}
                                 description={moment(slot.date).format("h:mm a")}
                                 left={props => <List.Icon {...props} icon="timetable"/>}
                                 right={props => <IconButton icon="window-close" size={18} onPress={() => {

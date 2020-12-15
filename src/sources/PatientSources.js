@@ -1,17 +1,19 @@
 import axios from 'axios';
-import { API_THERAPISTS } from '../utils/constants'
-import { getTherapistsFailure, getTherapistsInit, getTherapistsSuccess } from '../redux/actions/patientActions';
+import { API_PATIENTS } from '../utils/constants'
+import { getPatientsFailure, getPatientsInit, getPatientsSuccess } from '../redux/actions';
+import AsyncStorage from '@react-native-community/async-storage';
 
-
-export const getTherapists = (errorHandler = (err) => { }) => {
+export const getPatients = (errorHandler = (err) => { }) => {
     return (dispatch) => {
-        dispatch(getTherapistsInit());
-        axios.get( API_THERAPISTS
+        dispatch(getPatientsInit());
+        axios.get( API_PATIENTS
+            //x-auth-token: token
         ).then(res => {
-            dispatch(getTherapistsSuccess(res.data));
+            //save response
+            dispatch(getPatientsSuccess(res.data));
         })
         .catch(err => {
-            dispatch(getTherapistsFailure(err));
+            dispatch(getPatientsFailure(err));
             errorHandler(err);
         });
     }

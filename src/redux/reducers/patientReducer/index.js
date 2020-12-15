@@ -1,6 +1,6 @@
-import gettherapists from './get-therapists.reducer';
-import { combineReducers } from 'redux';
+import getpatients from './get-patients.reducer';
+import {combineReducers} from 'redux';
 
 export default combineReducers({
-    gettherapists
+    getpatients
 });
