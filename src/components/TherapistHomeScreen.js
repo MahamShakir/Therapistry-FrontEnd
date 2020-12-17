@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import {TouchableOpacity, View, StyleSheet} from 'react-native'
-import { Appbar, Avatar, List, Button, IconButton } from 'react-native-paper';
+import {TouchableOpacity, View, StyleSheet, ScrollView } from 'react-native'
+import { Appbar, Avatar, List, Button, IconButton, Paragraph } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPatients } from '../sources/PatientSources';
 import {DrawerActions, useNavigation} from '@react-navigation/native';
@@ -43,10 +43,10 @@ const TherapistHomeScreen = () => {
             <Appbar.Header>
                 <TouchableOpacity onPress={() => navigator.dispatch(DrawerActions.openDrawer())}><Avatar.Icon icon="menu" size={50} /></TouchableOpacity>
                 <Appbar.Content title="Welcome Therapist!" style={{marginLeft:0}} />
-                <Appbar.Action icon='calendar-month' onPress={() => { navigator.navigate(SCREENS.CALENDAR_SCREEN)}} />
+                <Appbar.Action icon='calendar-month' onPress={() => { navigator.navigate(SCREENS.CREATE_SLOTS_SCREEN)}} />
             </Appbar.Header>
 
-
+        <ScrollView>
             <List.Section>
                 <List.Subheader>Your Patients</List.Subheader>
                     {displayReducer.isSuccess && patients.map((patient, i) => {
@@ -71,7 +71,12 @@ const TherapistHomeScreen = () => {
                                 
                         )
                     })}
+
+                    {patients.length == 0 && <Paragraph style={styles.message}>
+                        No Patients Registered
+                    </Paragraph> }
             </List.Section>
+        </ScrollView>
        </View>
 
     )
@@ -82,6 +87,10 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection : "row",
         justifyContent: "flex-end"
+    },
+    message: {
+        fontStyle: 'italic',
+        textAlign: 'center'
     }
 })
 

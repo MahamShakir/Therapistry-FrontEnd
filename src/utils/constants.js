@@ -4,6 +4,11 @@ export const ROLES = {
     PATIENT: "patient"
 }
 
+export const SLOT_STATUS = {
+    FREE: "free",
+    BOOKED: "booked"
+}
+
 /* navigators */
 export const NAVIGATORS = {
     ROOT_NAVIGATOR: "RootNavigator",
@@ -17,10 +22,11 @@ export const SCREENS = {
     HOME_SCREEN: "HomeScreen",
     SIGNUP_SCREEN: "SignupScreen",
     THERAPIST_HOME_SCREEN: "TherapistHomeScreen",
-    CALENDAR_SCREEN: "CalendarScreen",
+    CREATE_SLOTS_SCREEN: "CreateSlotsScreen",
     CONVERSATIONS_SCREEN: "ConversationsScreen",
     MOOD_SCREEN: "MoodScreen",
-    PATIENT_HOME_SCREEN: "PatientHomeScreen"
+    PATIENT_HOME_SCREEN: "PatientHomeScreen",
+    SCHEDULED_APPOINTMENTS_SCREEN: "ScheduledAppointmentsScreen"
 }
 
 

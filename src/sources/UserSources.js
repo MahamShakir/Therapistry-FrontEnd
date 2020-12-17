@@ -20,13 +20,41 @@ export const loginUser = ({ email, password }, errorHandler = (err) => { }) => {
             email,
             password
         }).then(res => {
+            let payload = res.data;
             const token = res.data["token"];
             AsyncStorage.setItem(
                 'token',
                 token
             ).then(_ => {
                 AsyncStorage.setItem('user', JSON.stringify(res.data)).then(_ => {
-                    dispatch(loginUserSuccess(res.data));
+                    let role_id = payload.role_id;
+                    let url;
+                    let userInfo;
+
+                    if(payload.user_role == ROLES.THERAPIST){
+                        url = API_THERAPISTS + role_id;
+                    }
+                    else if(payload.user_role == ROLES.PATIENT){
+                        url = API_PATIENTS + role_id;
+                    }
+
+                    axios.get(url
+                    ).then(res2 => {
+                        if(payload.user_role == ROLES.THERAPIST){
+                            userInfo = res2.data["therapists"];
+                        }
+                        else if(payload.user_role == ROLES.PATIENT){
+                            userInfo = res2.data["patient"];
+                        }
+                
+                        payload["user_name"] = userInfo.fullName;
+                        dispatch(loginUserSuccess(payload));
+                    })
+                    .catch(err => {
+                        dispatch(loginUserFailure(err));
+                        errorHandler(err);
+                    })
+
                 }).catch((err) => {
                     dispatch(loginUserFailure(err));
                     errorHandler(err);

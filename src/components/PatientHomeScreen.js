@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { View, TouchableOpacity, StyleSheet, ScrollView} from 'react-native';
-import { Title, Button, List, Appbar, Avatar, Portal, Modal, IconButton, Divider, Snackbar} from 'react-native-paper';
+import { View, TouchableOpacity, StyleSheet, ScrollView, Image} from 'react-native';
+import { Title, Button, List, Appbar, Avatar, Portal, Modal, IconButton, Divider, Snackbar, Paragraph} from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation, DrawerActions } from '@react-navigation/native';
 import { getTherapists } from '../sources/TherapistSources';
 import { bookAppointment } from '../sources/AppointmentSources';
 import moment from 'moment';
+import { SLOT_STATUS } from '../utils/constants';
 
 
 
@@ -35,8 +36,8 @@ const PatientHomeScreen = () => {
         setVisible(!isVisible);
     }
 
-    function toggleSnack() {
-        setSnackVisible(!isSnackVisible);
+    function hideSnack() {
+        setSnackVisible(false);
     }
 
     function handleTherapistPress(i) {
@@ -47,8 +48,8 @@ const PatientHomeScreen = () => {
     }
 
     function handleBookSlot(slot_id) {
-        toggleSnack();
         dispatch(bookAppointment({therapists_id, slot_id}, handleDisplayFail));
+
     }
 
     useEffect(() => {
@@ -88,17 +89,22 @@ const PatientHomeScreen = () => {
                             />
                         )
                     })}
+
+                    {therapists.length == 0 && <Paragraph style={styles.message}>
+                        No Therapists Available
+                    </Paragraph> }
             </List.Section>
         </ScrollView>
 
             <Portal>
                 <Modal visible={isVisible} onDismiss={toggleModal} contentContainerStyle={styles.modalStyle}>
+                    <ScrollView>
                     <List.Section>
                         <List.Subheader> {name}'s Available Slots</List.Subheader>
                         <Divider style={{height: 3}} />
                         {slots.map((slot, j) => {
                             return(
-                                slot.status == "free" &&
+                                slot.status == SLOT_STATUS.FREE &&
                                 <List.Item 
                                     key={j}
                                     title={moment(slot.date).format("ddd Do MMM, 'YY")}
@@ -109,14 +115,21 @@ const PatientHomeScreen = () => {
                             )
                         })}
                     </List.Section>
+                    </ScrollView>
+
+                    {slots.filter(slot => slot.status == SLOT_STATUS.FREE).length == 0 && <Image 
+                        source={require('../images/no_data.png')}
+                        style={styles.image}
+                        />}
+
                 </Modal>
-                <Snackbar visible={isSnackVisible} 
+                <Snackbar visible={bookAppointmentReducer.isLoading} 
                 duration={900}
                 action={{
                     label: "OK",
-                    onPress: () => {toggleSnack}
+                    onPress: () => {hideSnack}
                 }}
-                onDismiss={toggleSnack} >You Confirmed An Appointment</Snackbar>
+                onDismiss={hideSnack} >You Confirmed An Appointment</Snackbar>
             </Portal>
         </View>
     )
@@ -127,6 +140,13 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         padding: 5,
         margin: 20
+    },
+    image: {
+        marginLeft: 65
+    },
+    message: {
+        fontStyle: 'italic',
+        textAlign: 'center'
     }
 })
   
