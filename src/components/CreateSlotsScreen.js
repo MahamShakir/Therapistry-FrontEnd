@@ -82,12 +82,7 @@ const CreateSlotsScreen = () => {
     return(
         <View>
             <Appbar.Header>
-                <Appbar.BackAction onPress={() => {navigator.reset({
-                    index: 0,
-                    routes: [{
-                        name: SCREENS.THERAPIST_HOME_SCREEN
-                    }]
-                })}} />
+                <Appbar.BackAction onPress={() => {navigator.goBack()}} />
                 <Appbar.Content title="Appointment Slots" style={{marginLeft:0}} />
                 <Appbar.Action icon="calendar-plus" onPress={toggleDatePickerView}/>
                 <Appbar.Action icon="calendar-check" onPress={handleScheduleUpdate} />

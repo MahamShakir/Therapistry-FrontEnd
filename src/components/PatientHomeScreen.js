@@ -6,7 +6,7 @@ import { useNavigation, DrawerActions } from '@react-navigation/native';
 import { getTherapists } from '../sources/TherapistSources';
 import { bookAppointment } from '../sources/AppointmentSources';
 import moment from 'moment';
-import { SLOT_STATUS } from '../utils/constants';
+import { SLOT_STATUS, SCREENS } from '../utils/constants';
 
 
 
@@ -73,6 +73,7 @@ const PatientHomeScreen = () => {
             <Appbar.Header>
                 <TouchableOpacity onPress={() => navigator.dispatch(DrawerActions.openDrawer())}><Avatar.Icon icon="menu" size={50} /></TouchableOpacity>
                 <Appbar.Content title="Welcome Patient!" style={{marginLeft:0}} />
+                <Appbar.Action icon='calendar-clock' onPress={() => { navigator.navigate(SCREENS.SCHEDULED_APPOINTMENTS_SCREEN)}} />
             </Appbar.Header>
 
         <ScrollView>
