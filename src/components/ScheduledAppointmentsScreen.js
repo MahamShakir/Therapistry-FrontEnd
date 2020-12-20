@@ -5,7 +5,7 @@ import {Text, Appbar, Paragraph, Button, Card } from 'react-native-paper';
 import Timeline from 'react-native-timeline-flatlist';
 import { useDispatch, useSelector } from 'react-redux';
 import { ROLES } from '../utils/constants';
-import { getAppointments } from '../sources/AppointmentSources';
+import { cancelAppointment, getAppointments } from '../sources/AppointmentSources';
 import moment from 'moment';
 
 
@@ -19,6 +19,7 @@ const ScheduledAppointmentsScreen = () => {
   const navigator = useNavigation();
   const userReducer = useSelector(state => state.userReducer.login);
   const appointmentsReducer = useSelector(state => state.appointmentsReducer.getappointments);
+  const cancelAppointmentReducer = useSelector(state => state.appointmentsReducer.deleteappointment);
 
   function handleDisplayFail(err) {
     if(err.response.status == 500) setError("Some Error Occured");
@@ -51,7 +52,8 @@ const ScheduledAppointmentsScreen = () => {
           var row = {
             "time" : moment(appointments[i].date).format("ddd Do MMM, 'YY"),
             "title" : appointments[i].patient_id.fullName,
-            "description" : "at " + moment(appointments[i].date).format("h:mm a")
+            "description" : "at " + moment(appointments[i].date).format("h:mm a"),
+            "appointment_id": appointments[i]._id
           }
           data.push(row);
         }
@@ -70,7 +72,18 @@ const ScheduledAppointmentsScreen = () => {
         setData(data);
       }
     }
-  }, [appointmentsReducer.isLoading])
+  }, [appointmentsReducer.isLoading]);
+
+  useEffect(() => {
+    if(cancelAppointmentReducer.isSuccess == true) {   
+      dispatch(getAppointments(handleDisplayFail));
+    }
+  }, [cancelAppointmentReducer.isLoading]);
+
+  function handleCancelAppointment(appointment_id) {
+    dispatch(cancelAppointment(userReducer.data.role_id, appointment_id, (err) => console.log("PAGAL", err)));
+
+  }
 
 
   return (
@@ -106,6 +119,9 @@ const ScheduledAppointmentsScreen = () => {
             return (
               <Card>
                 <Card.Title title={rowData.title} subtitle={rowData.description} />
+                {userReducer.data.user_role == ROLES.THERAPIST && <Card.Actions>
+                  <Button onPress={() => handleCancelAppointment(rowData.appointment_id)}>Cancel</Button>
+                </Card.Actions>}
               </Card>
             )
           }}

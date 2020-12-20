@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API_APPOINTMENTS, CONFIRM_SLOT, ROLES } from '../utils/constants';
+import { API_APPOINTMENTS, CANCEL_APPOINTMENT, CONFIRM_SLOT, ROLES } from '../utils/constants';
 import { 
     getAppointmentsFailure, 
     getAppointmentsInit, 
@@ -8,6 +8,7 @@ import {
     bookAppointmentInit,
     bookAppointmentSuccess } from '../redux/actions';
 import AsyncStorage from '@react-native-community/async-storage';
+import { cancelAppointmentFailure, cancelAppointmentInit, cancelAppointmentSuccess } from '../redux/actions/appointmentsActions/delete-cancel-appointment.actions';
 
 export const getAppointments = (errorHandler = (err) => { }) => {
     return(dispatch, getState) => {
@@ -58,6 +59,31 @@ export const bookAppointment = ({therapists_id, slot_id}, errorHandler = (err) =
             })
             .catch(err => {
                 dispatch(bookAppointmentFailure(err));
+                errorHandler(err);
+            })
+        })
+        .catch(err => errorHandler(err));
+    }
+}
+
+export const cancelAppointment = (therapists_id, appointment_id, errorHandler = (err) => { }) => {
+    return(dispatch) => {
+        dispatch(cancelAppointmentInit());
+        let API_CANCEL_APPOINTMENT = API_APPOINTMENTS + therapists_id + "/" + appointment_id + CANCEL_APPOINTMENT;
+        console.log("IJLUBABABABALUBABA", API_CANCEL_APPOINTMENT)
+        AsyncStorage.getItem('token'
+        ).then(token => {
+            axios.delete( API_CANCEL_APPOINTMENT, {
+                headers : {
+                    "x-auth-token" : token
+                }
+            }
+            ).then(res => {
+                dispatch(cancelAppointmentSuccess(res.data));
+            })
+            .catch(err => {
+                console.log(err);
+                dispatch(cancelAppointmentFailure(err));
                 errorHandler(err);
             })
         })

@@ -26,7 +26,8 @@ export const SCREENS = {
     CONVERSATIONS_SCREEN: "ConversationsScreen",
     MOOD_SCREEN: "MoodScreen",
     PATIENT_HOME_SCREEN: "PatientHomeScreen",
-    SCHEDULED_APPOINTMENTS_SCREEN: "ScheduledAppointmentsScreen"
+    SCHEDULED_APPOINTMENTS_SCREEN: "ScheduledAppointmentsScreen",
+    RECORDING_SCREEN: "RecordingScreen"
 }
 
 
@@ -69,6 +70,10 @@ export const BOOK_APPOINTMENT_INIT = "BOOK_APPOINTMENT_INIT";
 export const BOOK_APPOINTMENT_SUCCESS = "BOOK_APPOINTMENT_SUCCESS";
 export const BOOK_APPOINTMENT_FAILURE = "BOOK_APPOINTMENT_FAILURE";
 
+export const CANCEL_APPOINTMENT_FAILURE = "CANCEL_APPOINTMENT_FAILURE"
+export const CANCEL_APPOINTMENT_INIT = "CANCEL_APPOINTMENT_INIT"
+export const CANCEL_APPOINTMENT_SUCCESS = "CANCEL_APPOINTMENT_SUCCESS"
+
 /*APIS*/
 export const API_LOGIN = "https://therapistry.herokuapp.com/login";
 export const API_PATIENTS = "https://therapistry.herokuapp.com/patients/";
@@ -77,4 +82,5 @@ export const API_APPOINTMENTS = "https://therapistry.herokuapp.com/appointments/
 export const API_SLOTS = "https://therapistry.herokuapp.com/slots/therapists/";
 export const CREATE_SLOTS = "/create-slots";
 export const CONFIRM_SLOT = "/confirm-slot";
+export const CANCEL_APPOINTMENT = "/cancel-appointment";
 export const API_PUT_TOKEN = "https://therapistry.herokuapp.com/messaging/updateToken/";

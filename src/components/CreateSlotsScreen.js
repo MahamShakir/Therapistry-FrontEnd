@@ -132,7 +132,6 @@ const CreateSlotsScreen = () => {
                                 title={moment(slot.date).format("ddd Do MMM, 'YY")}
                                 description={moment(slot.date).format("h:mm a")}
                                 left={props => <List.Icon {...props} icon="timetable"/>}
-                                right={props => <IconButton icon="close-circle" size={18} />}
                             />
                         )
                     })}
