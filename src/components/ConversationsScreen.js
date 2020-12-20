@@ -14,7 +14,7 @@ export default function ConversationsScreen({route}) {
 
   const navigator = useNavigation();
 
-  const currentUserId = userReducer.data.user_id;
+  const currentUserId = userReducer.data.role_id;
   const otherUser = route.params.conversation_with.id;
 
   let [messages, setMessages] = useState([]);
