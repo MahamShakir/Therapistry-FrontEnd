@@ -6,6 +6,7 @@ import CreateSlotsScreen from '../components/CreateSlotsScreen';
 import TherapistHomeScreen from '../components/TherapistHomeScreen';
 import PatientHomeScreen from '../components/PatientHomeScreen';
 import ScheduledAppointmentsScreen from '../components/ScheduledAppointmentsScreen';
+import RecordingScreen from '../components/RecordingScreen';
 import { Drawer, Text, Avatar, Title, ActivityIndicator, Divider } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useDispatch, useSelector } from 'react-redux';
@@ -94,6 +95,12 @@ export const HomeNavigator = () => {
                     component={PatientHomeScreen}
                     options={{ drawerLabel: 'Home',
                     drawerIcon: (({focused}) => <Icon name="home-outline" size={25} /> ) }} />} 
+
+                {role == ROLES.PATIENT && <NavigationDrawer.Screen 
+                    name={SCREENS.RECORDING_SCREEN}  
+                    component={RecordingScreen}
+                    options={{ drawerLabel: 'Record',
+                    drawerIcon: (({focused}) => <Icon name="microphone-outline" size={25} /> ) }} />}         
 
                 <NavigationDrawer.Screen  
                     name={SCREENS.SCHEDULED_APPOINTMENTS_SCREEN}
