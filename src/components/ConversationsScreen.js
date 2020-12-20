@@ -45,6 +45,7 @@ export default function ConversationsScreen({route}) {
         });
         setMessages(chat);
         setChatRef(chat_ref);
+        listenToNewMessages = true;
       }).catch(err => {
         console.error(err);
       });
@@ -55,6 +56,7 @@ export default function ConversationsScreen({route}) {
 
   const handleOnSend = (messages = []) => {
     try {
+
       messages = messages.map(msg => {
         msg.createdAt = msg.createdAt.getTime();
         return msg;
@@ -80,7 +82,7 @@ export default function ConversationsScreen({route}) {
         <GiftedChat
           messages={messages}
           onSend={messages => handleOnSend(messages)}
-          user={{_id: currentUserId}}
+          user={{_id: currentUserId, avatar: "https://www.pngfind.com/pngs/m/470-4703547_icon-user-icon-hd-png-download.png"}}
           renderBubble={(props) => {
             return (
               <Bubble {...props} wrapperStyle={{
