@@ -52,6 +52,15 @@ const PatientHomeScreen = () => {
 
     }
 
+    function handleOnChatPress(i) {
+        navigator.navigate(SCREENS.CONVERSATIONS_SCREEN, {
+            conversation_with: {
+                id: therapists[i]._id,
+                fullName: therapists[i].fullName
+            }
+        })
+    }
+
     useEffect(() => {
         dispatch(getTherapists(handleDisplayFail));
     }, []);
@@ -87,6 +96,7 @@ const PatientHomeScreen = () => {
                                 title={therapist.fullName}
                                 description="Therapist"
                                 left={props => <List.Icon {...props} icon="account-heart" />}
+                                right={props => <IconButton {...props} icon="chat" onPress={() => handleOnChatPress(i)} />}
                             />
                         )
                     })}

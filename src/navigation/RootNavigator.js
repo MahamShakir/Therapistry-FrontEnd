@@ -14,7 +14,7 @@ const Stack = createStackNavigator();
 
 export const RootNavigator = () => {
     return (
-        <Stack.Navigator initialRouteName = {SCREENS.SPLASH_SCREEN}>
+        <Stack.Navigator screenOptions={{headerShown:false}} initialRouteName = {SCREENS.SPLASH_SCREEN}>
             <Stack.Screen name={SCREENS.SPLASH_SCREEN} component={SplashScreen} />
             <Stack.Screen name={SCREENS.LOGIN_SCREEN} component={LoginScreen} />
             <Stack.Screen name={SCREENS.SIGNUP_SCREEN} component={SignupScreen} />

@@ -9,8 +9,8 @@ import { loginUser } from '../sources/UserSources';
 
 
 const LoginScreen = (props) => {
-    let [email, setEmail] = useState("p100@p100.com");
-    let [password, setPassword] = useState("p100abcde");
+    let [email, setEmail] = useState("t1@t1.com");
+    let [password, setPassword] = useState("t1abcde");
     let [error, setError] = useState("");
 
     const navigator = useNavigation();

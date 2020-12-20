@@ -34,7 +34,16 @@ const TherapistHomeScreen = () => {
 
     function handleOnChatPress(i) {
         navigator.navigate(SCREENS.CONVERSATIONS_SCREEN, {
-            conversation_with: patients[i]._id
+            conversation_with: {
+                id: patients[i]._id,
+                fullName: patients[i].fullName
+            }
+        })
+    }
+
+    function handleOnMoodPress(i) {
+        navigator.navigate(SCREENS.MOOD_SCREEN, {
+            fullName: patients[i].fullName
         })
     }
 
@@ -63,7 +72,7 @@ const TherapistHomeScreen = () => {
                                                     />
                                                     <IconButton 
                                                         {...props} icon="format-list-bulleted" 
-                                                        onPress={() => navigator.navigate(SCREENS.MOOD_SCREEN)}
+                                                        onPress={() => handleOnMoodPress(i)}
                                                     />
                                                 </View>}
                                 />

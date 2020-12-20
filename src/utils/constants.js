@@ -77,3 +77,4 @@ export const API_APPOINTMENTS = "https://therapistry.herokuapp.com/appointments/
 export const API_SLOTS = "https://therapistry.herokuapp.com/slots/therapists/";
 export const CREATE_SLOTS = "/create-slots";
 export const CONFIRM_SLOT = "/confirm-slot";
+export const API_PUT_TOKEN = "https://therapistry.herokuapp.com/messaging/updateToken/";
