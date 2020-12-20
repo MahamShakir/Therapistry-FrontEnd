@@ -32,7 +32,7 @@ class FirebaseService {
   }
 
   async subsribe(ref, callback) {
-    database().ref(ref).on('value', callback);
+    database().ref(ref).limitToLast(1).on('child_added', callback);
   }
 }
 

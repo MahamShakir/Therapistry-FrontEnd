@@ -20,16 +20,15 @@ export default function ConversationsScreen({route}) {
   let [messages, setMessages] = useState([]);
   let [chatRef, setChatRef] = useState("");
 
-  function handleOnReceiveMessages(msgs) {
-    if(msgs) {
-      setMessages(msgs);
+  function handleOnReceiveMessage(newMsg) {
+    if(newMsg) {
+      setMessages(msgs => [newMsg, ...msgs]);
     }
   }
 
   useEffect(() => {
     try {
-      ChatService.get_chat(currentUserId, otherUser, handleOnReceiveMessages).then(({chat, chat_ref}) => {
-        setMessages(chat);
+      ChatService.get_chat(currentUserId, otherUser, handleOnReceiveMessage).then(({chat, chat_ref}) => {
         setChatRef(chat_ref);
       }).catch(err => {
         console.error(err);
