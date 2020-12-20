@@ -32,8 +32,8 @@ class ChatService {
   async get_chat(id1, id2, onReceiveMessage) {
     try {
       let chat_ref = await this.create_chat(id1, id2);
-      await FirebaseService
-      let chat = await FirebaseService.subsribe(chat_ref, (snapshot) => {
+      let chat = await FirebaseService.get_childs(chat_ref);
+      await FirebaseService.subsribe(chat_ref, (snapshot) => {
         let val = snapshot.val();
         onReceiveMessage(val);
       });

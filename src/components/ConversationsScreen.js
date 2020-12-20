@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import ChatService from '../services/ChatService';
 
-import { GiftedChat } from 'react-native-gifted-chat';
+import { Bubble, GiftedChat } from 'react-native-gifted-chat';
 import { Text, Appbar } from 'react-native-paper';
 import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
@@ -20,15 +20,30 @@ export default function ConversationsScreen({route}) {
   let [messages, setMessages] = useState([]);
   let [chatRef, setChatRef] = useState("");
 
+  let listenToNewMessages = false;
+
   function handleOnReceiveMessage(newMsg) {
-    if(newMsg) {
-      setMessages(msgs => [newMsg, ...msgs]);
+    if(listenToNewMessages) {
+      if(newMsg) {
+        setMessages(msgs => [newMsg, ...msgs]);
+      }
+    } else {
+      listenToNewMessages = true;
     }
   }
 
   useEffect(() => {
     try {
       ChatService.get_chat(currentUserId, otherUser, handleOnReceiveMessage).then(({chat, chat_ref}) => {
+        chat.sort((a, b) => {
+          let date_a = new Date(a.createdAt);
+          let date_b = new Date(b.createdAt);
+
+          if(date_a < date_b) return 1;
+          else if(date_a > date_b) return -1;
+          return 0;
+        });
+        setMessages(chat);
         setChatRef(chat_ref);
       }).catch(err => {
         console.error(err);
@@ -40,6 +55,10 @@ export default function ConversationsScreen({route}) {
 
   const handleOnSend = (messages = []) => {
     try {
+      messages = messages.map(msg => {
+        msg.createdAt = msg.createdAt.getTime();
+        return msg;
+      })
       ChatService.send_message(chatRef, messages).then(res => {
         
       }).catch(err => {
@@ -62,6 +81,16 @@ export default function ConversationsScreen({route}) {
           messages={messages}
           onSend={messages => handleOnSend(messages)}
           user={{_id: currentUserId}}
+          renderBubble={(props) => {
+            return (
+              <Bubble {...props} wrapperStyle={{
+                  left: {
+                    backgroundColor: "#ddd"
+                  }
+                }}
+              />
+            )
+          }}
         />
       </View>
     )

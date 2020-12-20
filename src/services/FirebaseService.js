@@ -20,6 +20,15 @@ class FirebaseService {
     }
   }
 
+  async get_childs(ref) {
+    try {
+      let snapshot = await database().ref(ref).orderByKey().once('value');
+      return snapshot.val();
+    } catch (err) {
+      throw new Error(err);
+    }
+  }
+
   async push_value(ref, val) {
     try {
       let new_ref = await database().ref(ref).push();
