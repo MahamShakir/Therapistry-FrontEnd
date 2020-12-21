@@ -8,22 +8,20 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { useDispatch, useSelector } from 'react-redux';
 import { getToken } from '../sources/TokenSource';
 
+
+
 const SplashScreen = (props) => {
   let [animatedValue, setAnimatedValue] = useState(new Animated.Value(0));
   
   const scale = animatedValue.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0.5, 2]
+    inputRange: [0, 1, 1.5],
+    outputRange: [0, 1.5, 0]
   })
   const spin = animatedValue.interpolate({
     inputRange: [0, 1],
     outputRange: ['0deg', '360deg' ]
   })
-  const translate = animatedValue.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, 50]
-  })
-
+ 
   const navigator = useNavigation();
   const dispatch = useDispatch();
 
@@ -44,7 +42,7 @@ const SplashScreen = (props) => {
 
   useEffect(() => {
     dispatch(getToken(handleGetTokenError));
-    //animate();
+    animate();
   }, []);
 
   useEffect(() => {

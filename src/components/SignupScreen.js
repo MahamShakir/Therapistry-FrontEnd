@@ -1,6 +1,6 @@
 import React, { useState , useEffect} from 'react';
-import { Text, View, StyleSheet , Image } from 'react-native';
-import {Button, TextInput, RadioButton, IconButton, Paragraph} from 'react-native-paper';
+import { Text, View, StyleSheet , Image, Dimensions } from 'react-native';
+import {Button, TextInput, RadioButton, IconButton, Paragraph, Appbar} from 'react-native-paper';
 
 import {useNavigation} from '@react-navigation/native';
 import { useDispatch , useSelector } from 'react-redux';
@@ -54,11 +54,17 @@ const SignupScreen = (props) => {
 
         <View style={styles.container}>
 
+            <Appbar.Header>
+                <Appbar.BackAction onPress={() => {navigator.goBack()}} />
+                <Appbar.Content title="Signup" style={{marginLeft:0}} />
+            </Appbar.Header>
+
             <Image source = {require('../images/logo.png')}
                     style = {styles.logo}
               />
             
             <TextInput
+                style={{paddingLeft:10, paddingRight:10}}
                 label='Full Name'
                 mode='outlined'
                 placeholder='Enter Name'
@@ -66,6 +72,7 @@ const SignupScreen = (props) => {
                 />
 
             <TextInput
+                style={{padding:10}}    
                 label='Email'
                 mode='outlined'
                 placeholder='Enter Email'
@@ -73,6 +80,7 @@ const SignupScreen = (props) => {
                 />
    
             <TextInput
+                style={{paddingLeft:10, paddingRight:10}}
                 label='Password'
                 placeholder='Enter Password'
                 mode = 'outlined'
@@ -119,11 +127,10 @@ const styles = StyleSheet.create({
     container: {
         justifyContent :'center',
         flex: 13,
-        padding: 10,
         backgroundColor: '#B39DDB'
     },
     button : {
-        marginTop:15,
+        marginBottom:15,
         marginLeft: '25%',
         padding: 5,
         width:'50%',
@@ -131,19 +138,21 @@ const styles = StyleSheet.create({
     logo : {
         width: '20%',
         height: '20%',
-       
+        marginLeft: Dimensions.get('screen').width/3
     },
  
     radioOption1: {
         flex : 1,
         flexDirection : 'row', 
         alignItems: 'center',
+        padding:10
     },
 
     radioOption2: {
         flex : 1,
         flexDirection : 'row',
         alignItems: 'center',
+        padding:10
     }
 })
 

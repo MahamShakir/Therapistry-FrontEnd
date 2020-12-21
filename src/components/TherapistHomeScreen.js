@@ -28,7 +28,7 @@ const TherapistHomeScreen = () => {
 
     useEffect(() => {
         if(displayReducer.isSuccess == true) {
-            setPatients(displayReducer.data.patient);
+            setPatients(displayReducer.data.foundPatient);
         }
     }, [displayReducer.isSuccess]);
 
@@ -43,6 +43,7 @@ const TherapistHomeScreen = () => {
 
     function handleOnMoodPress(i) {
         navigator.navigate(SCREENS.MOOD_SCREEN, {
+            id: patients[i]._id,
             fullName: patients[i].fullName
         })
     }
@@ -57,7 +58,7 @@ const TherapistHomeScreen = () => {
 
         <ScrollView>
             <List.Section>
-                <List.Subheader>Your Patients</List.Subheader>
+                <List.Subheader>Your Registered Patients</List.Subheader>
                     {displayReducer.isSuccess && patients.map((patient, i) => {
                         return(
                                 <List.Item 
