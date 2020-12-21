@@ -42,7 +42,7 @@ const SplashScreen = (props) => {
 
   useEffect(() => {
     dispatch(getToken(handleGetTokenError));
-    animate();
+    //animate();
   }, []);
 
   useEffect(() => {
@@ -73,7 +73,6 @@ const SplashScreen = (props) => {
 
     <Animated.Image
       style={{
-        transform: [{scale:scale}, {rotate:spin}],
         marginTop: 10}}
         source={require('../images/logo.png')} />
 
