@@ -70,9 +70,17 @@ export const BOOK_APPOINTMENT_INIT = "BOOK_APPOINTMENT_INIT";
 export const BOOK_APPOINTMENT_SUCCESS = "BOOK_APPOINTMENT_SUCCESS";
 export const BOOK_APPOINTMENT_FAILURE = "BOOK_APPOINTMENT_FAILURE";
 
-export const CANCEL_APPOINTMENT_FAILURE = "CANCEL_APPOINTMENT_FAILURE"
-export const CANCEL_APPOINTMENT_INIT = "CANCEL_APPOINTMENT_INIT"
-export const CANCEL_APPOINTMENT_SUCCESS = "CANCEL_APPOINTMENT_SUCCESS"
+export const CANCEL_APPOINTMENT_FAILURE = "CANCEL_APPOINTMENT_FAILURE";
+export const CANCEL_APPOINTMENT_INIT = "CANCEL_APPOINTMENT_INIT";
+export const CANCEL_APPOINTMENT_SUCCESS = "CANCEL_APPOINTMENT_SUCCESS";
+
+export const GET_MOODS_INIT = "GET_MOODS_INIT"; 
+export const GET_MOODS_SUCCESS = "GET_MOODS_SUCCESS"; 
+export const GET_MOODS_FAILURE = "GET_MOODS_FAILURE";
+
+export const POST_MOOD_INIT = "POST_MOOD_INIT"; 
+export const POST_MOOD_SUCCESS = "POST_MOOD_SUCCESS"; 
+export const POST_MOOD_FAILURE = "POST_MOOD_FAILURE";
 
 /*APIS*/
 export const API_LOGIN = "https://therapistry.herokuapp.com/login";
@@ -84,3 +92,5 @@ export const CREATE_SLOTS = "/create-slots";
 export const CONFIRM_SLOT = "/confirm-slot";
 export const CANCEL_APPOINTMENT = "/cancel-appointment";
 export const API_PUT_TOKEN = "https://therapistry.herokuapp.com/messaging/updateToken/";
+export const API_POST_MOOD = "https://therapistry.herokuapp.com/mood/save-mood/";
+export const API_GET_MOODS = "https://therapistry.herokuapp.com/mood/get-moods/";
