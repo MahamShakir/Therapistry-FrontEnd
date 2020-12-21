@@ -17,7 +17,7 @@ export const postMood = ({res, ext}, errorHandler = (err) => {}) => {
         AsyncStorage.getItem('token').then(token => {
             axios.post( API_POST_MOOD, {
                 audio: {
-                    mime: "audio/"+ext,
+                    ext,
                     data: res
                 }
             }, {
@@ -26,8 +26,6 @@ export const postMood = ({res, ext}, errorHandler = (err) => {}) => {
                 }
             }).then(res => {
                 dispatch(postMoodSuccess(res.data));
-                console.log("HAAN")
-
             }).catch( err => {
                 dispatch(postMoodFailure(err));
                 errorHandler(err);
